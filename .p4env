@@ -1,0 +1,23 @@
+# PERFORCE {{{
+export P4CHARSET="utf8"
+export P4PORT="perforce:1666"
+export P4USER="javiunzu"
+export P4EDITOR="vim"
+p4 login -s || p4 login # Log in if not already logged in.
+P4WORKSPACES="$(p4 workspaces -u ${P4USER} | awk '{print $2}')"
+switch2workspace () {
+    [[ ${P4WORKSPACES[*]} == *${1}* ]] || { printf "Not a valid workspace!\n";return 1; }
+    export P4CLIENT="${1}"
+    export WORKSPACE="$(p4 clients -u "${P4USER}" -e "${1}" | cut -d ' ' -f5)"
+    #export PYTHONPATH="${WORKSPACE}"/linux_amd64/lib
+    cd "${WORKSPACE}"
+}
+
+complete -W "${P4WORKSPACES[*]}" switch2workspace
+# P4 auto-completion is publicly available on:
+# https://swarm.workshop.perforce.com/projects/p4-completion/
+# And the author's github account:
+# http://zachwhaleys.website/p4-completion/
+[[ -e ~/p4_completion.bash ]] && source ~/p4_completion.bash
+alias getlatest="p4 sync 2&>1 | awk '/- deleted as /{print \"\033[01;31m[-]\"$0};/- updating /{print \"\033[01;32m[^]\"$0};/ - added /{print \"\033[01;34m[+]\"$0}'"
+# }}}
