@@ -38,6 +38,7 @@ set encoding=utf-8
 set autoindent
 set hlsearch
 set incsearch
+set path+=**
 set showmatch
 set laststatus=2
 " FileType specific settings {{{
