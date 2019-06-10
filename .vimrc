@@ -86,6 +86,15 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 " }}}
+" {{{Netrw
+let g:netrw_banner = 0
+let g:netrw_browse_split = 1
+let g:netrw_winsize = 25
+let g:netrw_altv = 1
+" Per default, netrw leaves unmodified buffers open. This autocommand
+" deletes netrw's buffer once it's hidden (using ':q', for example)
+autocmd FileType netrw setl bufhidden=delete
+"}}}
 
 " Tabs {{{
 set expandtab
@@ -108,7 +117,7 @@ autocmd BufWinEnter * set relativenumber
 autocmd BufWinLeave * set norelativenumber
 autocmd VimEnter * set relativenumber
 "}}}
-
+set guioptions -=rT
 set t_Co=256
 set background=dark
 color wombat
@@ -134,7 +143,8 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
-noremap <F5> :NERDTreeToggle<cr>
+"noremap <F5> :NERDTreeToggle<cr>
+noremap <F5> :Lexplore<cr>
 noremap <F9> :cd %:p:h<cr>:pwd<cr>
 noremap <F10> :vsplit $MYVIMRC<cr>
 noremap <F11> :source $MYVIMRC<cr>
