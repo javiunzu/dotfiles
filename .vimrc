@@ -117,7 +117,9 @@ autocmd BufWinEnter * set relativenumber
 autocmd BufWinLeave * set norelativenumber
 autocmd VimEnter * set relativenumber
 "}}}
-set guioptions -=rT
+set guioptions -=r
+set guioptions -=T
+set guioptions -=L
 set t_Co=256
 set background=dark
 color wombat
