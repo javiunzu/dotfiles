@@ -10,6 +10,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias rebash="source ~/.bashrc"
 alias python='printf "\033[00;36m" && python -ttB'
 alias python3='printf "\033[00;32m" && python3 -ttB'
+alias sudo='sudo -E'
 
 cd () {
 	builtin cd "$@" && ls
