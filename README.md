@@ -8,6 +8,8 @@ Features:
 * Customized PS1 prompt colors: Changes the username to red after becoming `root`
 ## .dircolors - Colour definitions for ls. ##
 * A color scheme that matches the prompt.
+## .fonts ##
+User font directory. Mainly for patched and icon fonts.
 ## .config/qtile ##
 Configuration files for the tiling window manager qtile. Features:
 * Modular config.
