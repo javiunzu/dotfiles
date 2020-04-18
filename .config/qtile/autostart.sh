@@ -1,3 +1,3 @@
-compton
-nm-applet
-
+#!/bin/bash
+compton&
+nm-applet&
