@@ -1,26 +1,28 @@
 # -*- coding: utf-8 -*-
-import layouts
-import keys
-import widgets
 import os
-import pywal
+import subprocess
 from libqtile.config import Key, Screen, Group, Drag, Click
 from libqtile.command import lazy
 from libqtile import layout, bar, widget, hook
+import layouts
+import keys
+import widgets
 
 mod = keys.mod
 
-wallpaper_dir = os.path.expanduser('~/Pictures/Wallpaper')
-# Set a random wallpaper using pywal
-wallpaper = pywal.image.get(wallpaper_dir)
-pywal.wallpaper.change(wallpaper)
-theme = pywal.colors.get(wallpaper)
-
 keys = keys.keys
-group_names = ['\uf0ac' , '\uf0f6', '\uf120', '\uf07c', '\uf0c3', '\uf11b', '\uf085', '\uf0c0', '\uf0e4']
-groups = [Group(i) for i in group_names]
+group_names = [('\uf0ac', {'layout': 'monadtall'}),
+               ('\uf0f6', {'layout': 'monadtall'}),
+               ('\uf120', {'layout': 'monadtall'}),
+               ('\uf07c', {'layout': 'monadtall'}),
+               ('\uf0c3', {'layout': 'monadtall'}),
+               ('\uf11b', {'layout': 'max'}),
+               ('\uf085', {'layout': 'monadtall'}),
+               ('\uf0c0', {'layout': 'monadtall'}),
+               ('\uf0e4', {'layout': 'monadtall'})]
+groups = [Group(name, **args) for name, args in group_names]
 
-for i, name in enumerate(group_names, 1):
+for i, (name, kwargs) in enumerate(group_names, 1):
     # mod1 + letter of group = switch to group
     keys.append(
         Key([mod], str(i), lazy.group[name].toscreen())
@@ -30,7 +32,11 @@ for i, name in enumerate(group_names, 1):
     keys.append(
         Key([mod, "shift"], str(i), lazy.window.togroup(name))
     )
-
+@hook.subscribe.startup_once
+def autostart():
+    subprocess.run([os.path.expanduser('~/.config/qtile/autostart.sh')],
+                    check=False)  # Absence of the file or errors in it should not prevent qtile from starting.
+ 
 @hook.subscribe.screen_change
 def restart_on_randr(qtile, ev):
     qtile.cmd_restart()
@@ -40,8 +46,8 @@ layouts = layouts.layouts
 widget_defaults = widgets.defaults
 
 screens = [
-    Screen(top=bar.Bar(widgets.top(theme), size=20),
-           bottom=bar.Bar(widgets.bottom(theme), size=20)),
+    Screen(top=bar.Bar(widgets.top(), size=20),
+           bottom=bar.Bar(widgets.bottom(), size=25)),
     Screen()
 ]
 
@@ -60,7 +66,22 @@ main = None
 follow_mouse_focus = False
 bring_front_click = False
 cursor_warp = False
-floating_layout = layout.Floating()
+floating_layout = layout.Floating(float_rules=[
+    {'wmclass': 'confirm'},
+    {'wmclass': 'dialog'},
+    {'wmclass': 'download'},
+    {'wmclass': 'error'},
+    {'wmclass': 'file_progress'},
+    {'wmclass': 'notification'},
+    {'wmclass': 'splash'},
+    {'wmclass': 'toolbar'},
+    {'wmclass': 'confirmreset'},  # gitk
+    {'wmclass': 'makebranch'},  # gitk
+    {'wmclass': 'maketag'},  # gitk
+    {'wname': 'branchdialog'},  # gitk
+    {'wname': 'pinentry'},  # GPG key password entry
+    {'wmclass': 'ssh-askpass'},  # ssh-askpass
+])
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 extentions = []

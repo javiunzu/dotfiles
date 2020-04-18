@@ -1,18 +1,26 @@
+import os
+import pywal
 from libqtile import widget
 defaults = dict(font='DroidSansMonoForPowerlinePlusNerdFileTypesMono',
-                fontsize=12,
+                fontsize=16,
                 padding=3)
 
-def glyph(**kwargs):
-    return widget.TextBox(text='\ue0ba', margin=0, fontsize=72, **kwargs)
+wallpaper_dir = os.path.expanduser('~/Pictures/Wallpaper')
+# Set a random wallpaper using pywal
+wallpaper = pywal.image.get(wallpaper_dir)
+pywal.wallpaper.change(wallpaper)
+theme = pywal.colors.get(wallpaper)
 
-def top(theme):
+def glyph(**kwargs):
+    return widget.TextBox(text='\ue0ba', margin=0, fontsize=60, **kwargs)
+
+def top():
     return [
         glyph(foreground=theme['colors']['color6']),
         widget.GroupBox(margin_x=0, background=theme['colors']['color6'], foreground=theme['colors']['color8'], this_current_screen_border=theme['colors']['color4'], highlight_method='block', rounded=False, use_mouse_wheel=False, center_aligned=True),   # selected color 4, text 8
         glyph(background=theme['colors']['color6'], foreground='000000'),
         widget.WindowName(),
-        widget.TextBox(text='\ue0ba', margin=0, fontsize=72, background='000000', foreground=theme['colors']['color2']),
+        glyph(background='000000', foreground=theme['colors']['color2']),
         widget.CurrentLayoutIcon(background=theme['colors']['color2']),
         widget.CurrentLayout(background=theme['colors']['color2']),
         glyph(background=theme['colors']['color2'], foreground=theme['colors']['color4']),
@@ -23,15 +31,15 @@ def top(theme):
         glyph(background=theme['colors']['color5'], foreground=theme['colors']['color3']),
         widget.TextBox(text='\uf0e7', background=theme['colors']['color3']),
         widget.Battery(background=theme['colors']['color3'], format='{char} {percent:2.0%}'),
-        glyph(background=theme['colors']['color3'], foreground='000000'),
-
         widget.Systray(background=theme['colors']['color3']),
+        widget.Clipboard(background=theme['colors']['color3']),
+        glyph(background=theme['colors']['color3'], foreground='000000'),
         widget.Notify(background=theme['colors']['color3']),
         widget.TextBox(text='\uf073'),
         widget.Clock(format='%a %H:%M %Y-%m-%d')
         ]
 
-def bottom(theme):
+def bottom():
     return [
         widget.Prompt(),
         widget.TaskList(),
