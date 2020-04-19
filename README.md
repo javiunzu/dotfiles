@@ -14,5 +14,8 @@ User font directory. Mainly for patched and icon fonts.
 Configuration files for the tiling window manager qtile. Features:
 * Modular config.
 * Uses pywal to set the wallpaper and dynamically color the widgets.
+* Autostarts `compton` for window compositing.
 * Eye-candy with Powerline glyphs and FontAwesome icons.
+
+![qtile](qtile.png)
 
