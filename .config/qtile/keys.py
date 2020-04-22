@@ -10,7 +10,7 @@ keys = [
     Key([mod], "j", lazy.layout.up(), desc='Switch to next window in stack pane.'),
     Key([mod, "control"], "k", lazy.layout.shuffle_down(), desc='Shuffle window down.'),
     Key([mod, "control"], "j", lazy.layout.shuffle_up(), desc='Shuffle window up.'),
-    Key([mod], "space", lazy.layout.next(), desc='Switch focus to next window in stack.'),
+    Key([mod], 'Tab', lazy.layout.next(), desc='Switch focus to next window in stack.'),
     Key([mod, "shift"], "space", lazy.layout.rotate(), desc='Swap panes of split stack.'),
     Key([mod], 'm', lazy.layout.grow(), desc='Enlarge pane on focus.'),
     Key([mod], 'b', lazy.layout.shrink(), desc='Shrink pane on focus.'),
@@ -29,7 +29,8 @@ keys = [
     Key([mod], "Return", lazy.spawn(TERM), desc='Start a terminal emulator.'),
 
     # Toggle between different layouts as defined below
-    Key([mod], "Tab", lazy.next_layout(), desc='Swap layout.'),
+    Key([mod], 'space', lazy.next_layout(), desc='Swap layout.'),
+    Key([mod, 'shift'], 'space', lazy.window.toggle_floating(), desc='Toggle floating window.'),
     Key([mod], "x", lazy.window.kill(), desc='Close window.'),
 
     Key([mod], 'w', lazy.spawn('firefox'), desc='Launch web browser.'),
@@ -38,6 +39,7 @@ keys = [
     Key([mod, "control"], "r", lazy.restart(), desc='Restart qtile.'),
     Key([mod, "control"], "q", lazy.shutdown(), desc='Exit qtile.'),
     Key([mod], "r", lazy.spawncmd(), desc='Run a command.'),
-    Key([mod], 'p', lazy.spawn('arandr'), desc='Launch screen configuration tool.')
+    Key([mod], 'p', lazy.spawn('arandr'), desc='Launch screen configuration tool.'),
+    Key([mod], 'l', lazy.spawn('xscreensaver-command -lock'), desc='Lock the screen')
 ]
 
