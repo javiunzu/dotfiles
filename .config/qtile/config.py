@@ -67,6 +67,8 @@ follow_mouse_focus = False
 bring_front_click = False
 cursor_warp = False
 floating_layout = layout.Floating(float_rules=[
+    {'wmclass': 'VirtualBox Machine'},
+    {'wmclass': 'Steam'},
     {'wmclass': 'confirm'},
     {'wmclass': 'dialog'},
     {'wmclass': 'download'},

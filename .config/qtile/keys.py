@@ -3,7 +3,7 @@ from libqtile.config import Key
 from libqtile.command import lazy
 mod = 'mod4'
 
-TERM = os.getenv('TERM', 'xfce4-terminal')
+TERM = 'alacritty'
 EDITOR = os.getenv('EDITOR', TERM + '-e vim')
 keys = [
     Key([mod], "k", lazy.layout.down(), desc='Switch to previous window in stack pane.'),
@@ -17,8 +17,8 @@ keys = [
     Key([mod], '0', lazy.layout.normalize(), desc='Restart the layout.'),
     # Sound
     #Key([], "XF86AudioMute", lazy.spawn("amixer -q set Master toggle")),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 sset Master 1- unmute"), desc='Volume down.'),
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 sset Master 1+ unmute"), desc='Volume up.'),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 sset Master 2- unmute"), desc='Volume down.'),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 sset Master 2+ unmute"), desc='Volume up.'),
     # Swap panes of split stack
     # Swap panes of split stack
     # Toggle between split and unsplit sides of stack.
@@ -33,6 +33,7 @@ keys = [
     Key([mod, 'shift'], 'space', lazy.window.toggle_floating(), desc='Toggle floating window.'),
     Key([mod], "x", lazy.window.kill(), desc='Close window.'),
 
+    Key([mod], 'q', lazy.spawn('keepassx'), desc='Open KeePass'),
     Key([mod], 'w', lazy.spawn('firefox'), desc='Launch web browser.'),
     Key([mod], 'e', lazy.spawn('{} -e ranger'.format(TERM)), desc='Launch file explorer.'),
     Key([mod], 't', lazy.spawn('gvim'), desc='Launch text editor.'),
