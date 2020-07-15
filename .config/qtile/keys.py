@@ -25,7 +25,7 @@ keys = [
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
-    Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
+    # Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
     Key([mod], "Return", lazy.spawn(TERM), desc='Start a terminal emulator.'),
 
     # Toggle between different layouts as defined below
@@ -39,7 +39,7 @@ keys = [
     Key([mod], 't', lazy.spawn('gvim'), desc='Launch text editor.'),
     Key([mod, "control"], "r", lazy.restart(), desc='Restart qtile.'),
     Key([mod, "control"], "q", lazy.shutdown(), desc='Exit qtile.'),
-    Key([mod], "r", lazy.spawncmd(), desc='Run a command.'),
+    Key([mod], "r", lazy.spawn('rofi -show run'), desc='Run a command.'),
     Key([mod], 'p', lazy.spawn('arandr'), desc='Launch screen configuration tool.'),
     Key([mod], 'l', lazy.spawn('xscreensaver-command -lock'), desc='Lock the screen')
 ]
