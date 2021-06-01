@@ -11,6 +11,7 @@ alias rebash="source ~/.bashrc"
 alias python='printf "\033[00;36m" && python -ttB'
 alias python3='printf "\033[00;32m" && python3 -ttB'
 alias sudo='sudo -E'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 
 cd () {
 	builtin cd "$@" && ls
